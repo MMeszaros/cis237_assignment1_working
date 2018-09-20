@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Beverage.cs" />
     <Compile Include="BeverageCollection.cs" />
+    <Compile Include="CsvProcessor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserInterface.cs" />

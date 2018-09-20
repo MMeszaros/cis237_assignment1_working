@@ -10,7 +10,7 @@ namespace cis237_assignment1
     {
         //BACKING FIELDS
         /************************************/
-        private int id;
+        private string id;
         private string name;
         private string pack; //The package size
         private decimal price;
@@ -18,7 +18,7 @@ namespace cis237_assignment1
 
         //PROPERTIES
         /************************************/
-        public int Id
+        public string Id
         {
             set { id = value; }
             get { return id; }
@@ -54,27 +54,21 @@ namespace cis237_assignment1
         /// <summary>
         /// Overrides the ToString() method to properly format the beverage information for output.
         /// Example:
-        ///     Beverage
-        ///     Id#: #####
-        ///     Name: BeverageName
-        ///     Pack: ##.# unit
-        ///     Price: $ ##.##
-        ///     Active: True/False
+        ///     Beverage -  Id#: #####    Name: BeverageName            Pack: ##.# unit    Price: $ ##.##  Active: True/False
         /// </summary>
         /// <returns></returns>
         public override string ToString()
         {
-            //Concatenates a string listing the beverage information in vertical orientation                                        <--------------------------QUESTION
-            string output = "Beverage" +
-                "\r\nId#: " + id +
-                "\r\nName: " + name +
-                "\r\nPack: " + pack +
-                "\r\nPrice: " + price.ToString("c") +
-                "\r\nActive: " + active;
+            //Concatenates a string listing the beverage information in horizontal spaced orientation
+            string output = "Beverage - " +
+                "Id#: " + id.PadRight(7) +
+                "Name: " + name.PadRight(35) +
+                "Pack: " + pack.PadRight(10) +
+                "Price: " + price.ToString("c").PadRight(10) +
+                "Active: " + active;
 
             return output;
         }
-
 
         //CONSTRUCTORS
         /************************************/
@@ -87,7 +81,7 @@ namespace cis237_assignment1
         /// <param name="price">The price of the beverage.</param>
         /// <param name="active">"true" - the beverage is still being sold.
         /// "false" - The beverage is discontinued.</param>
-        public Beverage(int id, string name, string pack, decimal price, bool active)
+        public Beverage(string id, string name, string pack, decimal price, bool active)
         {
             this.id = id;
             this.name = name;
