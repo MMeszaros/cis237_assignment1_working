@@ -6,80 +6,91 @@ using System.Threading.Tasks;
 
 namespace cis237_assignment1
 {
-
-    enum Prompt { Menu, AddItem}
+    enum MenuOption { LoadDataFiles, ListInventory, AddItem, Search, ShowMenu};
 
     class UserInterface
     {
+
         //Variables
         /****************************************************/
         // A string to store the user menu
         private string menu = "Menu:\r\n" +
             "".PadRight(50, '-') + "\r\n" +
-            "\"1\" - Load inventory from data files.\r\n" +
-            "\"2\" - List beverage inventory.\r\n" +
-            "\"3\" - Add an item to the beverage inventory.\r\n" +
-            "\"4\" - Search for item by ID.\r\n" +
-            "\"5\" - Close Program.\r\n" +
+            "\"0\" - Load inventory from data files.\r\n" +
+            "\"1\" - List beverage inventory.\r\n" +
+            "\"2\" - Add an item to the beverage inventory.\r\n" +
+            "\"3\" - Search for item by ID.\r\n" +
             "".PadRight(50, '-') + "\r\n";
 
         private bool inputValid;
-
+        
         //Methods
         /****************************************************/
 
-        public string GetUserInput(Prompt p)
+        public List<string> GetUserInput(MenuOption op)
         {
-            string userInput;
+            List<string> userInput = new List<string>();
+
             do
             {
                 try
                 {
-                    switch (p)
+                    Console.WriteLine("Type: \"menu\" to redisplay the menu. or \"exit\" to end the program.");
+                    switch ((int)op)
                     {
-                        case Prompt.AddItem:
-                            Console.Write("Enter a 5 digit alphanumeric item ID: ");
-                            if((userInput = Console.ReadLine().Trim()).Length == 5)
-                            {
-                                Console.WriteLine();
-                                Console.Write("Enter the item name: ");
-                                if(Console.ReadLine())
-                                
-                            }
+                        case 0:
                             break;
 
 
                         default:
-                            Console.WriteLine(menu);
-                            Console.Write("Enter a selection from the menu to execute (Type \"menu\" to redisplay the menu): ");
-                            userInput = Console.ReadLine().Trim();
-                            inputValid = int.TryParse(userInput, out int test);
-                            break;
+                            Console.Write("Enter a selection from the menu to execute:");
+                            userInput.Add(Console.ReadLine().Trim());
+                            if (uint.Parse(userInput[0]) < 5)
+                                inputValid = true;
+                            else
+                                userInput.RemoveAt(userInput.Count - 1);
+                                Console.WriteLine("Invalid entry. Must match a number option from the menu.");
+                                break;
                     }
                 }
                 catch (Exception e)
                 {
-                    inputValid = false;
-                    Display(e);
+                    switch ((int)op)
+                    {
+                        case 0:
+                            break;
+                        case 1:
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            break;
+                        case 4:
+                            Console.WriteLine("Invalid entry. Must match an option number from the menu.");
+                            break;
+                        default:
+                            
+                            break;
+                    }
+                    userInput.RemoveAt(userInput.Count - 1);
                 }
                 finally
                 {
 
                 }
-
             } while (!inputValid);
 
             return userInput;
         }
 
+        public void PrintMenu()
+        {
+            Console.WriteLine(menu);
+        }
+
         public void Display(string output)
         {
             Console.WriteLine(output);
-        }
-
-        public void Display(Exception e)
-        {
-            Console.WriteLine("Invalid Entry!");
         }
     }
 }

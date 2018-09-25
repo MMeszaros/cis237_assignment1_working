@@ -17,51 +17,21 @@ namespace cis237_assignment1
             UserInterface ui = new UserInterface();
             CsvProcessor file = new CsvProcessor("../../../datafiles/beverage_list.csv");
             BeverageCollection beverages = new BeverageCollection(4000, 100);
-            Beverage newBev;
 
-            string userInput;
-
+            string userInput = "";
+            ui.PrintMenu();
             do
             {
-                userInput = ui.GetUserInput(Prompt.Menu);
-
-                switch (userInput)
+                switch (ui.GetUserInput(MenuOption.ShowMenu).Last())
                 {
-                    case "1":
-                        if (!file.DataLoaded)
-                        {
-                            Exception importStatus = file.Import(beverages);
-                            if (importStatus == null)
-                            {
-                                ui.Display("File loaded successfully.");
-                            }
-                            else
-                            {
-                                ui.Display(importStatus.ToString());
-                            }
-                        }
-                        else
-                        {
-                            ui.Display("Data files already loaded.");
-                        }
+                    case "0":
                         break;
-
-                    case "2":
-                        ui.Display(beverages.GetPrintString());
+                    default:
                         break;
-
-                    case "3":
-                        ui.GetUserInput(Prompt.AddItem);
-                        break;
-
-                    case "4":
-                        break;
-
-                    case "5":
-                        break;
-
                 }
-            } while (userInput != "5");
+            } while (userInput != "exit");
+
+
         }
     }
 }
