@@ -16,13 +16,19 @@ namespace cis237_assignment1
 
         //Backing Fields
         /*********************************************/
-        private bool dataLoaded; // stores whether or not the user loaded the data files so that the data in the beverageCollection is overwritten.
+        private bool dataLoaded = false; // stores whether or not the user loaded the data files so that the data in the beverageCollection is overwritten.
 
         //Properties
         /*********************************************/
         public bool DataLoaded
         {
             get { return dataLoaded; }
+        }
+
+        public string Path
+        {
+            get { return path; }
+            set { path = value; }
         }
 
         //Methods
@@ -38,6 +44,7 @@ namespace cis237_assignment1
                 {
                     CsvProcessor.ProcessLine(line, beverageCollection);
                 }
+                dataLoaded = true;
             }
             catch(Exception e)
             {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace cis237_assignment1
 {
-    enum MenuOption { LoadDataFiles, ListInventory, AddItem, Search, ShowMenu};
+    enum MenuOption { AddItem, Search, ShowMenu};
 
     class UserInterface
     {
@@ -22,7 +22,6 @@ namespace cis237_assignment1
             "\"3\" - Search for item by ID.\r\n" +
             "".PadRight(50, '-') + "\r\n";
 
-        private bool inputValid;
         
         //Methods
         /****************************************************/
@@ -31,21 +30,40 @@ namespace cis237_assignment1
         {
             List<string> userInput = new List<string>();
 
+            bool inputValid;
+
             do
             {
                 try
                 {
-                    Console.WriteLine("Type: \"menu\" to redisplay the menu. or \"exit\" to end the program.");
+                    Console.WriteLine("Type: \"cancel\" to return to the menu options. or \"exit\" to end the program.");
                     switch ((int)op)
                     {
                         case 0:
+                            if(userInput.Count == 0)
+                            {
+                                Console.Write("Enter the Item Id#: ");
+                                userInput.Add(Console.ReadLine().Trim());
+                                if (userInput.Last().Length == 5)
+                                {
+                                    inputValid = true;
+                                    Console.WriteLine();
+                                }
+                                else
+                                    Console.WriteLine("");
+                            }
+                            if(userInput.Count == 1)
+                            {
+
+                            }
                             break;
 
 
                         default:
+                            PrintMenu();
                             Console.Write("Enter a selection from the menu to execute:");
                             userInput.Add(Console.ReadLine().Trim());
-                            if (uint.Parse(userInput[0]) < 5)
+                            if (uint.Parse(userInput[0]) < 3)
                                 inputValid = true;
                             else
                                 userInput.RemoveAt(userInput.Count - 1);
